@@ -48,6 +48,10 @@ solaris*)
    my_htop_platform=solaris
    AC_DEFINE([HTOP_SOLARIS], [], [Building for Solaris])
    ;;
+cygwin*)
+   my_htop_platform=cygwin
+   AC_DEFINE([HTOP_CYGWIN], [], [Building for Cygwin])
+   ;;
 *)
    my_htop_platform=unsupported
    AC_DEFINE([HTOP_UNSUPPORTED], [], [Building for an unsupported platform])
@@ -244,6 +248,10 @@ if test "$my_htop_platform" = "solaris"; then
    AC_CHECK_LIB([malloc], [free], [], [missing_libraries="$missing_libraries libmalloc"])
 fi
 
+if test "$my_htop_platform" = "cygwin"; then
+   AC_MSG_NOTICE([THIS IS A PLACEHOLDER FOR ANY REQUIRED CHECKS])
+fi
+
 AC_ARG_ENABLE(hwloc, [AS_HELP_STRING([--enable-hwloc], [enable hwloc support for CPU affinity, disables Linux affinity])],, enable_hwloc="no")
 if test "x$enable_hwloc" = xyes
 then
@@ -353,6 +361,7 @@ AM_CONDITIONAL([HTOP_DRAGONFLYBSD], [test "$my_htop_platform" = dragonflybsd])
 AM_CONDITIONAL([HTOP_OPENBSD], [test "$my_htop_platform" = openbsd])
 AM_CONDITIONAL([HTOP_DARWIN], [test "$my_htop_platform" = darwin])
 AM_CONDITIONAL([HTOP_SOLARIS], [test "$my_htop_platform" = solaris])
+AM_CONDITIONAL([HTOP_CYGWIN], [test "$my_htop_platform" = cygwin])
 AM_CONDITIONAL([HTOP_UNSUPPORTED], [test "$my_htop_platform" = unsupported])
 AC_SUBST(my_htop_platform)
 AC_CONFIG_FILES([Makefile htop.1])

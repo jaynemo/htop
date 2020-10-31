@@ -248,6 +248,23 @@ zfs/ZfsArcMeter.c zfs/ZfsCompressedArcMeter.c zfs/ZfsArcStats.c
 myhtopplatheaders = $(solaris_platform_headers)
 endif
 
+# Cygwin
+# -----------
+
+cygwin_platform_headers = \
+	cygwin/Platform.h \
+	cygwin/CygwinProcess.h \
+	cygwin/CygwinProcessList.h \
+	cygwin/Battery.h
+
+if HTOP_CYGWIN
+myhtopplatsources = cygwin/Platform.c \
+cygwin/CygwinProcess.c cygwin/CygwinProcessList.c \
+cygwin/Battery.c
+
+myhtopplatheaders = $(cygwin_platform_headers)
+endif
+
 # Unsupported
 # -----------
 
